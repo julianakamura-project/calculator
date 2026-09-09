@@ -1,16 +1,49 @@
-# This is a sample Python script.
+import art
+def add(n1, n2):
+    return n1 + n2
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def subtract(n1, n2):
+    return n1 - n2
 
+def multiply(n1, n2):
+    return n1 * n2
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def divide(n1, n2):
+    return n1 / n2
 
+operations = {"+": add,
+              "-": subtract,
+              "*": multiply,
+              "/": divide,
+}
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+repeat = True
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+while repeat:
+    continue_calc = True
+    print(art.logo)
+
+    number1 = float(input("What is the first number?: "))
+    while continue_calc:
+        print("""
++
+-
+*
+/
+""")
+        operation = input("Pick an operation: ")
+        number2 = float(input("What is the next number?: "))
+        result = operations[operation](number1, number2)
+
+        print(f"{number1} {operation} {number2} = {result}")
+
+        should_continue = input(f"Type 'y' to continue calculating with {result}, type 'n' to start a new calculation or type 'stop' to end calculation: ")
+        if should_continue == "y":
+            number1 = result
+        elif should_continue == "n":
+            print("\n" * 20)
+            continue_calc = False
+        elif should_continue == "stop":
+            repeat = False
+            print("Ending Calculator.")
+            break
